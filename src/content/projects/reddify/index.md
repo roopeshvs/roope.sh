@@ -1,7 +1,7 @@
 ---
 title: "Reddify"
 description: "Create Spotify Playlists out of Reddit Threads!"
-date: "04/02/2024"
+date: "2024-12-06"
 # demoURL: "https://reddify.pesh.dev"
 repoURL: "https://github.com/roopeshvs/reddify"
 ---
@@ -24,13 +24,13 @@ looked like a wonderful way to go about it.
 
 ## How does Reddify work?
 
-It is very simple. Once a Reddit thread is submitted, Reddify extracts the comments out of the 
-post and uses the Spotify Search API to narrow down the song and picks the top result. 
+Once a Reddit thread is submitted, Reddify extracts the comments out of the 
+post and uses the **Spotify Search API** to narrow down the song and picks the top result. 
 This idea was born out of my own experiences of finding Spotify's Search pretty spot on and worked 
 as well when I tried feeding it Reddit comments.
 
 ## How to use Reddify?
 
-Reddify used to be hosted on reddify.pesh.dev. Since I've not yet received Spotify's approval 
+Reddify used to be hosted on *reddify.pesh.dev*. Since I've not yet received Spotify's approval 
 to use their API publicly, it is temporarily down at the moment. Until then, if you want to try
 it out, please do so by cloning the repo, and following the instructions provided in README.
