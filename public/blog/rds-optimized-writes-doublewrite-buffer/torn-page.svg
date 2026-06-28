@@ -1,42 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 620 230" width="620" height="230" role="img" aria-labelledby="title desc">
-  <title id="title">Torn page after power loss</title>
-  <desc id="desc">A 16 KiB InnoDB page broken across four 4 KiB sectors. Before the write all four sectors hold the old contents. Power is lost partway through writing, leaving two new sectors and two old sectors. That is a torn page.</desc>
-  <style>
-    .lbl { font: 600 13px ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; fill: #525252; }
-    .sm  { font: 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #525252; opacity: 0.75; }
-    .stk { fill: none; stroke: #525252; stroke-width: 1.5; }
-    .stk-fill { fill: #525252; fill-opacity: 0.08; stroke: #525252; stroke-width: 1.5; }
-    .accent { fill: #ea580c; }
-    @media (prefers-color-scheme: dark) {
-      .lbl { fill: #d4d4d4; }
-      .sm  { fill: #d4d4d4; opacity: 0.7; }
-      .stk { stroke: #d4d4d4; }
-      .stk-fill { fill: #d4d4d4; fill-opacity: 0.12; stroke: #d4d4d4; }
-    }
-  </style>
-  <text x="90" y="28" class="lbl" text-anchor="middle">Before write</text>
-  <rect x="30" y="48" width="120" height="38" rx="3" class="stk" />
-  <rect x="30" y="86" width="120" height="38" rx="3" class="stk" />
-  <rect x="30" y="124" width="120" height="38" rx="3" class="stk" />
-  <rect x="30" y="162" width="120" height="38" rx="3" class="stk" />
-  <text x="90" y="72" class="sm" text-anchor="middle">old · 4 KiB</text>
-  <text x="90" y="110" class="sm" text-anchor="middle">old · 4 KiB</text>
-  <text x="90" y="148" class="sm" text-anchor="middle">old · 4 KiB</text>
-  <text x="90" y="186" class="sm" text-anchor="middle">old · 4 KiB</text>
-  <text x="90" y="225" class="sm" text-anchor="middle">16 KiB page</text>
-  <line x1="180" y1="125" x2="240" y2="125" class="stk" />
-  <polygon points="240,119 250,125 240,131" class="lbl" />
-  <text x="215" y="115" class="sm" text-anchor="middle">write…</text>
-  <text x="215" y="190" font-size="22" text-anchor="middle" class="accent">⚡</text>
-  <text x="215" y="225" class="sm accent" text-anchor="middle">power loss</text>
-  <text x="430" y="28" class="lbl" text-anchor="middle">After power loss</text>
-  <rect x="370" y="48" width="120" height="38" rx="3" class="stk-fill" />
-  <rect x="370" y="86" width="120" height="38" rx="3" class="stk-fill" />
-  <rect x="370" y="124" width="120" height="38" rx="3" class="stk" />
-  <rect x="370" y="162" width="120" height="38" rx="3" class="stk" />
-  <text x="430" y="72" class="sm" text-anchor="middle">new · 4 KiB</text>
-  <text x="430" y="110" class="sm" text-anchor="middle">new · 4 KiB</text>
-  <text x="430" y="148" class="sm" text-anchor="middle">old · 4 KiB</text>
-  <text x="430" y="186" class="sm" text-anchor="middle">old · 4 KiB</text>
-  <text x="430" y="225" class="lbl accent" text-anchor="middle">torn page</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 10 620 230" width="620" height="230" font-family="Arial, Helvetica, sans-serif">
+  <title>Torn page after power loss</title>
+  <desc>A 16 KiB InnoDB page broken across four 4 KiB sectors. Power loss partway through writing leaves two new sectors and two old sectors. That is a torn page.</desc>
+  <text x="90" y="28" fill="#737373" font-size="13" font-weight="600" text-anchor="middle">Before write</text>
+  <rect x="30" y="48" width="120" height="38" rx="3" fill="none" stroke="#737373" stroke-width="1.5"/>
+  <rect x="30" y="86" width="120" height="38" rx="3" fill="none" stroke="#737373" stroke-width="1.5"/>
+  <rect x="30" y="124" width="120" height="38" rx="3" fill="none" stroke="#737373" stroke-width="1.5"/>
+  <rect x="30" y="162" width="120" height="38" rx="3" fill="none" stroke="#737373" stroke-width="1.5"/>
+  <text x="90" y="72" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">old · 4 KiB</text>
+  <text x="90" y="110" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">old · 4 KiB</text>
+  <text x="90" y="148" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">old · 4 KiB</text>
+  <text x="90" y="186" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">old · 4 KiB</text>
+  <text x="90" y="225" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">16 KiB page</text>
+  <line x1="180" y1="125" x2="240" y2="125" stroke="#737373" stroke-width="1.5"/>
+  <polygon points="240,119 250,125 240,131" fill="#737373"/>
+  <text x="215" y="115" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">write…</text>
+  <text x="215" y="190" fill="#ea580c" font-size="22" text-anchor="middle">⚡</text>
+  <text x="215" y="225" fill="#ea580c" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" text-anchor="middle">power loss</text>
+  <text x="430" y="28" fill="#737373" font-size="13" font-weight="600" text-anchor="middle">After power loss</text>
+  <rect x="370" y="48" width="120" height="38" rx="3" fill="#737373" fill-opacity="0.15" stroke="#737373" stroke-width="1.5"/>
+  <rect x="370" y="86" width="120" height="38" rx="3" fill="#737373" fill-opacity="0.15" stroke="#737373" stroke-width="1.5"/>
+  <rect x="370" y="124" width="120" height="38" rx="3" fill="none" stroke="#737373" stroke-width="1.5"/>
+  <rect x="370" y="162" width="120" height="38" rx="3" fill="none" stroke="#737373" stroke-width="1.5"/>
+  <text x="430" y="72" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">new · 4 KiB</text>
+  <text x="430" y="110" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">new · 4 KiB</text>
+  <text x="430" y="148" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">old · 4 KiB</text>
+  <text x="430" y="186" fill="#737373" font-family="Menlo, Consolas, Courier New, monospace" font-size="11" opacity="0.8" text-anchor="middle">old · 4 KiB</text>
+  <text x="430" y="225" fill="#ea580c" font-size="13" font-weight="600" text-anchor="middle">torn page</text>
 </svg>
