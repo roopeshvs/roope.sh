@@ -31,6 +31,7 @@ as well when I tried feeding it Reddit comments.
 
 ## How to use Reddify?
 
-Reddify used to be hosted on *reddify.pesh.dev*. Since I've not yet received Spotify's approval 
-to use their API publicly, it is temporarily down at the moment. Until then, if you want to try
-it out, please do so by cloning the repo, and following the instructions provided in README.
+Reddify is archived and is no longer hosted or actively developed. The source code remains
+available on [GitHub](https://github.com/roopeshvs/reddify) for anyone who wants to run it
+themselves — clone the repo and follow the instructions in the README to get it up and running
+locally.

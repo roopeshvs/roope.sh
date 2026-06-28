@@ -1,7 +1,6 @@
-import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
-import partytown from '@astrojs/partytown'
-
+import tailwindcss from "@tailwindcss/vite";
+import partytown from "@astrojs/partytown";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import pagefind from "astro-pagefind";
@@ -9,13 +8,19 @@ import pagefind from "astro-pagefind";
 // https://astro.build/config
 export default defineConfig({
   site: "https://roope.sh",
-  integrations: [tailwind(), sitemap(), mdx(), pagefind(),
+  integrations: [
+    sitemap(),
+    mdx(),
+    pagefind(),
     partytown({
       config: {
         forward: ["dataLayer.push"],
       },
-  }),
+    }),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
     shikiConfig: {
       theme: "css-variables",
