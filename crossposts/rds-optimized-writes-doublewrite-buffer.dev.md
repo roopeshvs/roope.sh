@@ -14,7 +14,7 @@ The rest of this post is the long answer. It walks through what torn pages are, 
 
 ## The problem: torn pages
 
-![A 16 KiB InnoDB page split across four 4 KiB sectors. Power loss partway through writing leaves two new sectors and two old sectors, producing a torn page.](https://roope.sh/blog/rds-optimized-writes-doublewrite-buffer/torn-page.svg)
+![A 16 KiB InnoDB page split across four 4 KiB sectors. Power loss partway through writing leaves two new sectors and two old sectors, producing a torn page.](https://roope.sh/blog/rds-optimized-writes-doublewrite-buffer/torn-page.png)
 
 *A 16 KiB InnoDB page is written as four 4 KiB sector writes. Lose power partway through and you get a page that's half-new, half-old. That is a torn page.*
 
@@ -26,7 +26,7 @@ Databases solve this two ways. PostgreSQL writes full page copies into its write
 
 ## MySQL's solution: the doublewrite buffer
 
-![Dirty page in buffer pool, write and fsync to doublewrite area, write and fsync to tablespace location. Two physical writes per dirty page.](https://roope.sh/blog/rds-optimized-writes-doublewrite-buffer/doublewrite-path.svg)
+![Dirty page in buffer pool, write and fsync to doublewrite area, write and fsync to tablespace location. Two physical writes per dirty page.](https://roope.sh/blog/rds-optimized-writes-doublewrite-buffer/doublewrite-path.png)
 
 *The doublewrite buffer write path: each dirty page is written to a reserved on-disk area first, fsynced, then written to its tablespace location, fsynced again.*
 
@@ -81,7 +81,7 @@ The pattern is consistent: when the storage stack can atomically commit at least
 
 ## Enter AWS Nitro
 
-![Dirty page in buffer pool, single atomic 16 KiB write to tablespace location backed by AWS Nitro. Every dirty page is written once.](https://roope.sh/blog/rds-optimized-writes-doublewrite-buffer/optimized-writes-path.svg)
+![Dirty page in buffer pool, single atomic 16 KiB write to tablespace location backed by AWS Nitro. Every dirty page is written once.](https://roope.sh/blog/rds-optimized-writes-doublewrite-buffer/optimized-writes-path.png)
 
 *With Optimized Writes on, the doublewrite step disappears entirely. The page travels straight from the buffer pool to its final location in one atomic 16 KiB write.*
 
