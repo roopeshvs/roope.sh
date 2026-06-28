@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 720 155" width="720" height="155" role="img" aria-labelledby="title desc">
+  <title id="title">MySQL write path with the doublewrite buffer</title>
+  <desc id="desc">A dirty page in the buffer pool is written to the doublewrite area on disk and fsynced, then written to its final tablespace location and fsynced again. Every dirty page becomes two physical writes.</desc>
+  <style>
+    .lbl { font: 600 13px ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; fill: #525252; }
+    .sm  { font: 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #525252; opacity: 0.75; }
+    .cap { font: italic 13px ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; fill: #525252; opacity: 0.85; }
+    .stk { fill: none; stroke: #525252; stroke-width: 1.5; }
+    @media (prefers-color-scheme: dark) {
+      .lbl { fill: #d4d4d4; }
+      .sm  { fill: #d4d4d4; opacity: 0.7; }
+      .cap { fill: #d4d4d4; opacity: 0.85; }
+      .stk { stroke: #d4d4d4; }
+    }
+  </style>
+  <rect x="20" y="60" width="170" height="80" rx="6" class="stk" />
+  <text x="105" y="95" class="lbl" text-anchor="middle">Dirty page</text>
+  <text x="105" y="115" class="sm" text-anchor="middle">(buffer pool)</text>
+  <line x1="200" y1="100" x2="270" y2="100" class="stk" />
+  <polygon points="270,94 280,100 270,106" class="lbl" />
+  <text x="240" y="90" class="sm" text-anchor="middle">write</text>
+  <text x="240" y="120" class="sm" text-anchor="middle">+ fsync</text>
+  <rect x="290" y="60" width="170" height="80" rx="6" class="stk" />
+  <text x="375" y="95" class="lbl" text-anchor="middle">Doublewrite</text>
+  <text x="375" y="115" class="sm" text-anchor="middle">area</text>
+  <line x1="470" y1="100" x2="540" y2="100" class="stk" />
+  <polygon points="540,94 550,100 540,106" class="lbl" />
+  <text x="510" y="90" class="sm" text-anchor="middle">write</text>
+  <text x="510" y="120" class="sm" text-anchor="middle">+ fsync</text>
+  <rect x="560" y="60" width="140" height="80" rx="6" class="stk" />
+  <text x="630" y="95" class="lbl" text-anchor="middle">Tablespace</text>
+  <text x="630" y="115" class="sm" text-anchor="middle">(final location)</text>
+  <text x="360" y="190" class="cap" text-anchor="middle">Every dirty page is written twice.</text>
+</svg>
