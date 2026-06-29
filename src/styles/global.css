@@ -65,6 +65,15 @@ article {
     @apply text-black dark:text-white;
     @apply decoration-black/50 dark:decoration-white/50;
   }
+  article a.heading-anchor {
+    @apply pl-2 font-normal no-underline opacity-0;
+    @apply text-black/40 dark:text-white/40;
+    @apply transition-opacity duration-200;
+  }
+  article :where(h1, h2, h3, h4, h5, h6):hover .heading-anchor,
+  article .heading-anchor:focus-visible {
+    @apply opacity-100;
+  }
 }
 
 .animate {

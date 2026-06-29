@@ -2,34 +2,56 @@
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 
-import "@fontsource/geist-sans/100.css";
-import "@fontsource/geist-sans/200.css";
-import "@fontsource/geist-sans/300.css";
 import "@fontsource/geist-sans/400.css";
 import "@fontsource/geist-sans/500.css";
 import "@fontsource/geist-sans/600.css";
-import "@fontsource/geist-sans/700.css";
-import "@fontsource/geist-sans/800.css";
-import "@fontsource/geist-sans/900.css";
-import "@fontsource/geist-mono/100.css";
-import "@fontsource/geist-mono/200.css";
-import "@fontsource/geist-mono/300.css";
 import "@fontsource/geist-mono/400.css";
-import "@fontsource/geist-mono/500.css";
-import "@fontsource/geist-mono/600.css";
-import "@fontsource/geist-mono/700.css";
-import "@fontsource/geist-mono/800.css";
-import "@fontsource/geist-mono/900.css";
 
 interface Props {
   title: string;
   description: string;
   image?: string;
+  article?: {
+    headline: string;
+    publishedTime: Date;
+    modifiedTime?: Date;
+    tags?: string[];
+  };
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image } = Astro.props;
+const { title, description, image, article } = Astro.props;
+const imageURL = image ? new URL(image, Astro.url).toString() : undefined;
+
+const jsonLd = article
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: article.headline,
+      description,
+      datePublished: article.publishedTime.toISOString(),
+      ...(article.modifiedTime && {
+        dateModified: article.modifiedTime.toISOString(),
+      }),
+      ...(imageURL && { image: imageURL }),
+      ...(article.tags && article.tags.length > 0 && { keywords: article.tags }),
+      author: {
+        "@type": "Person",
+        name: "Roopesh",
+        url: "https://roope.sh",
+      },
+      publisher: {
+        "@type": "Person",
+        name: "Roopesh",
+        url: "https://roope.sh",
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonicalURL.toString(),
+      },
+    }
+  : null;
 ---
 
 <!-- Global Metadata -->
@@ -47,18 +69,47 @@ const { title, description, image } = Astro.props;
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={article ? "article" : "website"} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-{image && <meta property="og:image" content={new URL(image, Astro.url)} />}
+{imageURL && <meta property="og:image" content={imageURL} />}
+{
+  article && (
+    <>
+      <meta
+        property="article:published_time"
+        content={article.publishedTime.toISOString()}
+      />
+      {article.modifiedTime && (
+        <meta
+          property="article:modified_time"
+          content={article.modifiedTime.toISOString()}
+        />
+      )}
+      {article.tags?.map((tag) => (
+        <meta property="article:tag" content={tag} />
+      ))}
+    </>
+  )
+}
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-{image && <meta property="twitter:image" content={new URL(image, Astro.url)} />}
+{imageURL && <meta property="twitter:image" content={imageURL} />}
+
+{
+  jsonLd && (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd)}
+    />
+  )
+}
 
 <!-- PageFind -->
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
