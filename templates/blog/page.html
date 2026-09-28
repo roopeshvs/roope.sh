@@ -28,8 +28,11 @@
   {{ page.content | safe }}
 </article>
 
-<nav class="hstack justify-between mt-8">
-  {%- if page.earlier %}<a href="{{ page.earlier.permalink | safe }}">&larr; {{ page.earlier.title }}</a>{% else %}<span></span>{% endif %}
-  {%- if page.later %}<a href="{{ page.later.permalink | safe }}">{{ page.later.title }} &rarr;</a>{% endif %}
+{#- Zola 0.23 renamed these: `earlier`/`later` are gone and fail silently if
+    used. With sort_by = "date", `lower` is the newer post and `higher` the
+    older one, which matches the order the Astro site used. -#}
+<nav class="post-nav hstack justify-between mt-8">
+  {%- if page.lower %}<a href="{{ page.lower.permalink | safe }}">&larr; {{ page.lower.title }}</a>{% else %}<span></span>{% endif %}
+  {%- if page.higher %}<a href="{{ page.higher.permalink | safe }}">{{ page.higher.title }} &rarr;</a>{% else %}<span></span>{% endif %}
 </nav>
 {% endblock content %}
