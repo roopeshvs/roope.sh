@@ -1,0 +1,12 @@
+{
+  "name": "roope-sh-tools",
+  "private": true,
+  "type": "module",
+  "description": "Dev-only tooling. Not part of the site build: `zola build` needs none of this.",
+  "scripts": {
+    "og": "node og.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}
