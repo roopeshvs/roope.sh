@@ -1,0 +1,39 @@
+# Zola config. https://www.getzola.org/documentation/getting-started/configuration/
+# `config.toml` is still accepted as a fallback, but `zola.toml` is the current name.
+
+base_url = "https://roope.sh"
+title = "Roopesh"
+description = "DevOps notes from Roopesh — cloud infrastructure, developer experience, and platform engineering."
+default_language = "en"
+
+# Astro's `public/` still exists during the migration, and Zola would otherwise
+# write its build into it. Keep the output somewhere unambiguous.
+output_dir = "_site"
+
+# No Sass, no client-side search index: this site ships zero JavaScript.
+compile_sass = false
+build_search_index = false
+
+generate_sitemap = true
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+taxonomies = [{ name = "tags" }]
+
+[markdown]
+# Replaces rehype-slug + rehype-autolink-headings.
+insert_anchor_links = "right"
+external_links_target_blank = true
+
+[markdown.highlighting]
+# Replaces Shiki. Dual themes emit a `color-scheme`-aware stylesheet, so code
+# blocks follow the OS light/dark setting with no JavaScript.
+style = "class"
+light_theme = "github-light"
+dark_theme = "github-dark"
+add_color_scheme = true
+
+[extra]
+email = "hello@roope.sh"
+github = "https://github.com/roopeshvs"
+linkedin = "https://www.linkedin.com/in/roopesh-vs"

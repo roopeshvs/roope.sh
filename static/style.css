@@ -1,0 +1,154 @@
+/* Overrides on top of Oat. Loaded after oat.min.css.
+   Oat styles semantic elements directly, so this only needs layout plus a few
+   nudges toward the site's existing minimalist look. */
+
+:root {
+  /* Oat defaults are warm-grey; the site has always been neutral-grey. */
+  --primary: light-dark(#18181b, #fafafa);
+  --background: light-dark(#f5f5f5, #0a0a0a);
+  --accent-link: light-dark(#c2410c, #fb923c);
+
+  --wrap-width: 45rem;
+}
+
+/* ---- layout ------------------------------------------------------------ */
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap-width);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+main {
+  flex: 1;
+  padding-block: var(--space-12);
+}
+
+header {
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+
+header .brand {
+  font-weight: var(--font-semibold);
+}
+
+footer {
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--border);
+  font-size: var(--text-7);
+  color: var(--muted-foreground);
+}
+
+footer a {
+  color: var(--muted-foreground);
+}
+
+/* ---- post lists -------------------------------------------------------- */
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.post-list a {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  color: inherit;
+  transition: background-color var(--transition-fast);
+}
+
+.post-list a:hover {
+  background-color: var(--faint);
+}
+
+.post-list .title {
+  font-weight: var(--font-semibold);
+  color: var(--foreground);
+}
+
+.post-list .desc {
+  font-size: var(--text-7);
+  color: var(--muted-foreground);
+}
+
+/* ---- post meta --------------------------------------------------------- */
+
+.meta {
+  font-size: var(--text-7);
+  color: var(--muted-foreground);
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tags a {
+  display: inline-block;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  font-size: var(--text-7);
+  color: var(--muted-foreground);
+}
+
+.tags a:hover {
+  background-color: var(--faint);
+  color: var(--foreground);
+}
+
+/* ---- article content --------------------------------------------------- */
+
+article :is(p, li) a {
+  color: var(--accent-link);
+}
+
+/* Heading anchors from insert_anchor_links = "right". */
+a.zola-anchor {
+  padding-inline-start: var(--space-2);
+  color: var(--faint-foreground);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+:is(h1, h2, h3, h4, h5, h6):hover a.zola-anchor,
+a.zola-anchor:focus-visible {
+  opacity: 1;
+}
+
+figure {
+  margin: var(--space-6) 0;
+}
+
+figure svg {
+  display: block;
+  margin-inline: auto;
+}
+
+figcaption {
+  margin-block-start: var(--space-2);
+  font-size: var(--text-7);
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+/* Anchored headings should not hide under anything on jump. */
+html {
+  scroll-padding-top: var(--space-4);
+}
