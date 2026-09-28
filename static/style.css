@@ -108,7 +108,7 @@ footer a {
 
 .tags a {
   display: inline-block;
-  padding: 0 var(--space-2);
+  padding: var(--space-1) var(--space-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-small);
   font-size: var(--text-7);
@@ -118,6 +118,13 @@ footer a {
 .tags a:hover {
   background-color: var(--faint);
   color: var(--foreground);
+}
+
+/* Oat styles <details> as an accordion, which is designed to stack flush and so
+   carries no margin at all. As a standalone table of contents sitting in prose,
+   it needs the same breathing room as any other block. */
+details {
+  margin-block: var(--space-6);
 }
 
 /* ---- article content --------------------------------------------------- */
@@ -140,7 +147,7 @@ a.zola-anchor:focus-visible {
 }
 
 figure {
-  margin: var(--space-6) 0;
+  margin: var(--space-8) 0;
 }
 
 figure svg {
@@ -153,6 +160,14 @@ figcaption {
   font-size: var(--text-7);
   color: var(--muted-foreground);
   text-align: center;
+}
+
+/* The previous/next links are not part of the article; give them a clear break
+   from it rather than the 2rem a utility class happened to provide. */
+.post-nav {
+  margin-block-start: var(--space-16);
+  padding-block-start: var(--space-6);
+  border-top: 1px solid var(--border);
 }
 
 /* Anchored headings should not hide under anything on jump. */
