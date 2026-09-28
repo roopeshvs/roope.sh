@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ section.title }}</h1>
+<ul class="post-list">
+  {%- for page in section.pages %}{{<post.card page={page} />}}{% endfor %}
+</ul>
+{% endblock content %}

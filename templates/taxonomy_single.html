@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p><a href="/tags/">&larr; All tags</a></p>
+<h1>Posts tagged &ldquo;{{ term.name }}&rdquo;</h1>
+<ul class="post-list">
+  {%- for page in term.pages %}{{<post.card page={page} />}}{% endfor %}
+</ul>
+{% endblock content %}

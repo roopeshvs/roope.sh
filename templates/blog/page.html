@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p><a href="/blog/">&larr; Back to blog</a></p>
+
+<h1>{{ page.title }}</h1>
+{{<post.meta page={page} />}}
+{%- if page.taxonomies.tags %}{{<post.tags tags={page.taxonomies.tags} />}}{% endif %}
+
+{%- if page.toc %}
+<details open>
+  <summary>Table of Contents</summary>
+  <nav>
+    <ul>
+      {%- for h in page.toc %}
+      <li><a href="{{ h.permalink | safe }}">{{ h.title }}</a>
+        {%- if h.children %}
+        <ul>{% for c in h.children %}<li><a href="{{ c.permalink | safe }}">{{ c.title }}</a></li>{% endfor %}</ul>
+        {%- endif %}
+      </li>
+      {%- endfor %}
+    </ul>
+  </nav>
+</details>
+{%- endif %}
+
+<article>
+  {{ page.content | safe }}
+</article>
+
+<nav class="hstack justify-between mt-8">
+  {%- if page.earlier %}<a href="{{ page.earlier.permalink | safe }}">&larr; {{ page.earlier.title }}</a>{% else %}<span></span>{% endif %}
+  {%- if page.later %}<a href="{{ page.later.permalink | safe }}">{{ page.later.title }} &rarr;</a>{% endif %}
+</nav>
+{% endblock content %}

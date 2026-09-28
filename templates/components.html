@@ -1,0 +1,25 @@
+{# Shared components. Tera v2 registers these globally - no import needed. #}
+
+{% component post.card(page: map) %}
+<li>
+  <a href="{{ page.permalink | safe }}">
+    <span class="title">{{ page.title }}</span>
+    {%- if page.description %}<span class="desc">{{ page.description }}</span>{% endif %}
+  </a>
+</li>
+{% endcomponent post.card %}
+
+{% component post.meta(page: map) %}
+<p class="meta">
+  <time datetime="{{ page.date }}">{{ page.date | date(format="%B %-d, %Y") }}</time>
+  {%- if page.reading_time %} &bull; {{ page.reading_time }} min read{% endif %}
+</p>
+{% endcomponent post.meta %}
+
+{% component post.tags(tags: array) %}
+<ul class="tags">
+  {%- for tag in tags %}
+  <li><a href="/tags/{{ tag | slugify }}/">{{ tag }}</a></li>
+  {%- endfor %}
+</ul>
+{% endcomponent post.tags %}
