@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it midway.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # Official Zola action: runs `zola build` in ghcr.io/getzola/zola and
+      # uploads the result as a Pages artifact. Pinned to the commit v1 points
+      # at; the SHA in its README is stale.
+      - name: Build site
+        uses: getzola/github-pages@435a833fd3f1edcb28d70576c89e30a6365cd8f7
+        with:
+          zola_version: v0.23.6
+          # zola.toml sets output_dir = "_site"; the action defaults to "public".
+          output_dir: _site
+          # Link checking is deliberately not gated on here: it hits ~40 external
+          # URLs and a transient 429 would block an unrelated deploy. Run
+          # `zola check` locally instead.
+          check_links: "false"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5
