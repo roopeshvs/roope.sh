@@ -39,3 +39,16 @@ add_color_scheme = true
 email = "hello@roope.sh"
 github = "https://github.com/roopeshvs"
 linkedin = "https://www.linkedin.com/in/roopesh-vs"
+
+[link_checker]
+# These return 403/429 to any non-browser client but are fine for real readers,
+# so `zola check` would otherwise fail the build on healthy links.
+skip_prefixes = [
+  "https://stackoverflow.com/",
+  "https://dev.mysql.com/",
+  "https://github.com/",
+]
+# AWS docs render anchors client-side, so anchor checking gives false negatives.
+skip_anchor_prefixes = [
+  "https://docs.aws.amazon.com/",
+]

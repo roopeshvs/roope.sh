@@ -7,7 +7,7 @@ date = 2022-09-12
 tags = ["privacy", "open-source"]
 +++
 
-[Sherlock](https://github.com/sherlock-project/sherlock) is a CLI tool that can be used to find usernames across many social networks. In this post, I share how Sherlock was able to overcome a couple of hurdles in reliably finding if a username existed on Facebook. Sherlock works by having [a JSON file as the source](https://github.com/sherlock-project/sherlock/blob/master/sherlock/resources/data.json) where a large collection of sites are listed with a few attributes. 
+[Sherlock](https://github.com/sherlock-project/sherlock) is a CLI tool that can be used to find usernames across many social networks. In this post, I share how Sherlock was able to overcome a couple of hurdles in reliably finding if a username existed on Facebook. Sherlock works by having [a JSON file as the source](https://github.com/sherlock-project/sherlock/blob/master/sherlock_project/resources/data.json) where a large collection of sites are listed with a few attributes. 
 
 A sample entry from the file looks like this:  
 
