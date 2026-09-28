@@ -20,10 +20,16 @@
       {%- set_global seo_desc = "Posts tagged " ~ term.name ~ " on " ~ config.title -%}
     {%- endif -%}
     {%- set canonical = current_url | default(value=config.base_url) -%}
-    {%- set is_article = page is defined and page.date is defined -%}
+    {#- `page.date is defined` is true even when the value is null, so dateless
+        pages (like /archive/) would wrongly be tagged as articles. Test the
+        value itself. -#}
+    {%- set is_article = page is defined and page.date -%}
     {%- set full_title = seo_title ~ " | " ~ config.title if seo_title else config.title -%}
+    {#- Per-entry OG card, generated into static/og/ by tools/og.mjs. -#}
+    {%- set og_image = config.base_url ~ "/og/" ~ page.slug ~ ".png" if is_article else "" -%}
     {%- block seo -%}
     <title>{{ full_title }}</title>
+    <meta name="title" content="{{ full_title }}" />
     <meta name="description" content="{{ seo_desc }}" />
     <link rel="canonical" href="{{ canonical | safe }}" />
 
@@ -31,12 +37,43 @@
     <meta property="og:url" content="{{ canonical | safe }}" />
     <meta property="og:title" content="{{ full_title }}" />
     <meta property="og:description" content="{{ seo_desc }}" />
+    {%- if og_image %}
+    <meta property="og:image" content="{{ og_image | safe }}" />
+    <meta property="article:published_time" content="{{ page.date }}T00:00:00.000Z" />
+    {%- for tag in page.taxonomies.tags | default(value=[]) %}
+    <meta property="article:tag" content="{{ tag }}" />
+    {%- endfor %}
+    {%- endif %}
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="{{ canonical | safe }}" />
     <meta property="twitter:title" content="{{ full_title }}" />
     <meta property="twitter:description" content="{{ seo_desc }}" />
+    {%- if og_image %}
+    <meta property="twitter:image" content="{{ og_image | safe }}" />
+    {%- endif %}
     {%- endblock seo %}
+
+    {#- JSON-LD. This is data, not executable JavaScript: the site still ships
+        no runtime JS. Ported from the Astro Head component. -#}
+    {%- if is_article %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ page.title | json_encode | safe }},
+      "description": {{ seo_desc | json_encode | safe }},
+      "datePublished": "{{ page.date }}T00:00:00.000Z",
+      "image": "{{ og_image | safe }}",
+      {%- if page.taxonomies.tags %}
+      "keywords": {{ page.taxonomies.tags | json_encode | safe }},
+      {%- endif %}
+      "author": { "@type": "Person", "name": "Roopesh", "url": "{{ config.base_url | safe }}" },
+      "publisher": { "@type": "Person", "name": "Roopesh", "url": "{{ config.base_url | safe }}" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ canonical | safe }}" }
+    }
+    </script>
+    {%- endif %}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="{{ config.title }}" href="/rss.xml" />
