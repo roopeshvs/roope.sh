@@ -74,19 +74,25 @@ footer a {
   background-color: var(--faint);
 }
 
+/* Both are <span>, so they need to be block or they run together on one line. */
 .post-list .title {
+  display: block;
   font-weight: var(--font-semibold);
   color: var(--foreground);
 }
 
 .post-list .desc {
+  display: block;
+  margin-block-start: var(--space-1);
   font-size: var(--text-7);
+  line-height: 1.45;
   color: var(--muted-foreground);
 }
 
 /* ---- post meta --------------------------------------------------------- */
 
 .meta {
+  margin-block-start: var(--space-2);
   font-size: var(--text-7);
   color: var(--muted-foreground);
 }
@@ -94,6 +100,7 @@ footer a {
 .tags {
   list-style: none;
   padding: 0;
+  margin-block: var(--space-3) var(--space-6);
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
